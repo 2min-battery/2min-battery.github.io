@@ -1,5 +1,7 @@
 # 2分でバッテリー ランディングページ
 
+https://2min-battery.github.io/
+
 ## Structures
 - react w/z redux
 - webpack
