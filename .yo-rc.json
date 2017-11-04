@@ -1,0 +1,9 @@
+{
+  "generator-react-webpack": {
+    "appName": "2min-battery-github-io",
+    "style": "scss",
+    "cssmodules": true,
+    "postcss": true,
+    "generatedWithVersion": 4
+  }
+}
