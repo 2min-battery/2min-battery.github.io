@@ -13,20 +13,54 @@
   height: 100%;
 }
 
+@import "bases.scss";
 
-.full-screen-content {
+.title-content {
+  @extend %full-screen-content;
+
+  background: url(../images/shibuya.jpg) center center / cover no-repeat fixed;
+}
+
+.description-content {
+  @extend %full-screen-content;
+}
+
+.registration-content {
+  @extend %full-screen-content;
+}
+
+.card {
+  @extend %card;
+}
+
+.card-title {
+  @include with-font-size-title;
+
+  font-weight: 600;
+  text-align: center;
+  margin: $padding-unit;
+}
+
+.card-subtitle {
+  @include with-font-size-large;
+
+  font-weight: 300;
+  text-align: center;
+}
+
+.card-content {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
 
-  &.light {
-    background-color: #ffffff;
-  }
-
-  &.full-screen-content.dark {
-    background-color: #cccccc;
-  }
+.logo-image {
+  width: 25vw;
+  height: 25vw;
+  max-width: 128pt;
+  max-height: 128pt;
 }

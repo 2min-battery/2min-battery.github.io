@@ -17,25 +17,24 @@ class AppComponent extends React.Component {
         <div id="content-title" className="title-content">
           <div className="card">
             <Grid container spacing={0}>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={3}>
                 <div className="card-content">
                   <img
                     src={logoImage}
                     alt="2min battery Logo Image"
-                    style={{
-                      width: 96,
-                      height: 96,
-                    }}
+                    className="logo-image"
                   />
                 </div>
               </Grid>
-              <Grid item xs={12} sm={8}>
-                <div className="card-title">
-                  2分でバッテリー
-                </div>
-                <div className="card-subtitle">
-                  スマホのバッテリーがない！<br />
-                  救済サービス
+              <Grid item xs={12} sm={9}>
+                <div className="card-content">
+                  <div className="card-title">
+                    2分でバッテリー
+                  </div>
+                  <div className="card-subtitle">
+                    スマホのバッテリーがない！<br />
+                    救済サービス
+                  </div>
                 </div>
               </Grid>
             </Grid>
