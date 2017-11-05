@@ -1,46 +1,55 @@
 import React from 'react';
-import Button from "@react-mdc/button";
-import Card from "@react-mdc/card";
-import Checkbox from "@react-mdc/checkbox";
-import Dialog from "@react-mdc/dialog";
-import Elevation from "@react-mdc/elevation";
-import FAB from "@react-mdc/fab";
-import FormField from "@react-mdc/form-field";
-import LayoutGrid from "@react-mdc/layout-grid";
-import Radio from "@react-mdc/radio";
-import Ripple from "@react-mdc/ripple";
-import Switch from "@react-mdc/switch";
-import Textfield from "@react-mdc/textfield";
-import Typography from "@react-mdc/typography";
+import Button from "material-ui/Button";
+import Card from "material-ui/Card";
+import Grid from "material-ui/Grid";
 
 import './app.scss';
+
+const logoImage = require('../images/logo.png');
+
+// "Shibiya" Photo by Jason Ortego on Unsplash
 
 class AppComponent extends React.Component {
 
   render() {
     return (
       <div className="container">
-        <div id="content-title" className="full-screen-content light">
-          <Typography.Title>
-            2分でバッテリー
-          </Typography.Title>
-          <Typography.Subheading1>
-            「スマホのバッテリーがない！」<br />
-            救済サービス
-          </Typography.Subheading1>
-          <Button>
-            NEXT
-          </Button>
+        <div id="content-title" className="title-content">
+          <div className="card">
+            <Grid container spacing={0}>
+              <Grid item xs={12} sm={4}>
+                <div className="card-content">
+                  <img
+                    src={logoImage}
+                    alt="2min battery Logo Image"
+                    style={{
+                      width: 96,
+                      height: 96,
+                    }}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <div className="card-title">
+                  2分でバッテリー
+                </div>
+                <div className="card-subtitle">
+                  スマホのバッテリーがない！<br />
+                  救済サービス
+                </div>
+              </Grid>
+            </Grid>
+            <div  className="spacer" />
+            <Button>
+              NEXT
+            </Button>
+          </div>
         </div>
-        <div id="content-primary" className="full-screen-content dark">
-          <Ripple.Meta color="primary">
-            <Button>2</Button>
-          </Ripple.Meta>
+        <div id="content-primary" className="description-content">
+
         </div>
-        <div id="content-primary" className="full-screen-content light">
-          <Ripple.Meta color="primary">
-            <Button>3</Button>
-          </Ripple.Meta>
+        <div id="content-primary" className="registration-content">
+
         </div>
       </div>
     );
