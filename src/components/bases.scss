@@ -1,25 +1,25 @@
 // Variables
-$padding-unit: 16pt;
-$padding-unit-half: calc(#{padding-unit} / 2.0);
-$padding-unit-2: calc(#{padding-unit} * 2.0);
+$padding-unit: 16px;
+$padding-unit-half: calc(#{$padding-unit} / 2.0);
+$padding-unit-2: calc(#{$padding-unit} * 2.0);
 
 $font-size-title-min: 15pt;
 $font-size-large-min: 12pt;
-$font-size-small-min: 6pt;
+$font-size-small-min: 10pt;
 
 $min-target-width: 300pt;
 
 $font-size-title-relative: 5.333vw;
 $font-size-large-relative: 4.2vw;
-$font-size-small-relative: 2.1vw;
+$font-size-small-relative: 3.5vw;
 
 $max-target-width: 640pt;
 
 $font-size-title-max: 35pt;
 $font-size-large-max: 28pt;
-$font-size-small-max: 14pt;
+$font-size-small-max: 24pt;
 
-$card-background-color: rgba(255, 255, 255, 0.95);
+$card-background-color: white;
 
 // Mixins
 @mixin with-padding {
@@ -30,44 +30,45 @@ $card-background-color: rgba(255, 255, 255, 0.95);
   background-color: $card-background-color;
 }
 
-@mixin with-font-size($min, $relative, $max) {
+@mixin with-font-size($min, $relative, $max, $line-height-ratio) {
   @media screen and (max-width: $min-target-width) {
     font-size: $min;
-    line-height: $min;
+    line-height: calc(#{$min} * #{$line-height-ratio});
   }
   @media screen and (min-width: $min-target-width + 1) and (max-width: $max-target-width) {
     font-size: $relative;
-    line-height: $relative;
+    line-height: calc(#{$relative} * #{$line-height-ratio});
   }
   @media screen and (min-width: $max-target-width + 1) {
     font-size: $max;
-    line-height: $max;
+    line-height: calc(#{$max} * #{$line-height-ratio});
   }
 }
 
 @mixin with-font-size-title {
-  @include with-font-size($font-size-title-min, $font-size-title-relative, $font-size-title-max);
+  @include with-font-size($font-size-title-min, $font-size-title-relative, $font-size-title-max, 1.0);
 }
 
 @mixin with-font-size-large {
-  @include with-font-size($font-size-large-min, $font-size-large-relative, $font-size-large-max);
+  @include with-font-size($font-size-large-min, $font-size-large-relative, $font-size-large-max, 1.0);
 }
 
 @mixin with-font-size-small {
-  @include with-font-size($font-size-small-min, $font-size-small-relative, $font-size-small-max);
+  @include with-font-size($font-size-small-min, $font-size-small-relative, $font-size-small-max, 1.25);
 }
 
 %card {
-  @include with-padding;
   @include with-card-background-color;
 
+  padding: $padding-unit-2 0;
   margin: $padding-unit;
-  border-radius: 12pt;
+  border-radius: 6pt;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.18);
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
 }
 
 %full-screen-content {
