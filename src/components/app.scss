@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
 }
 
 #app {
@@ -23,19 +24,33 @@
 .title-content {
   @extend %full-screen-content;
 
-  background: url(../images/shibuya.jpg) center center / cover no-repeat fixed;
+  background: url(../images/shibuya.jpg);
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+
+  @media screen and (min-width: $mobile-width) {
+    background-attachment: fixed;
+  }
 }
 
 .description-content {
   @extend %full-screen-content;
 
-  background: linear-gradient(0deg, #DEE3FF, #F7F8FF)
+  background: linear-gradient(0deg,  #FFFAE2, #FFDEDE)
 }
 
 .registration-content {
   @extend %full-screen-content;
 
-  background: url(../images/shibuya_night.jpg) center center / cover no-repeat fixed;
+  background: url(../images/shibuya_night.jpg);
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+
+  @media screen and (min-width: $mobile-width) {
+    background-attachment: fixed;
+  }
 }
 
 .card {
