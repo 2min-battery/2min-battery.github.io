@@ -10,13 +10,14 @@ import React, {
 } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {} from '../actions/';
+import {
+  appSetDescriptionId,
+} from '../actions/';
 import Main from '../components/App';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
-    const { actions } = this.props;
-    return <Main actions={actions} />;
+    return <Main {...this.props} />;
   }
 }
 /* Populated by react-webpack-redux:reducer
@@ -25,17 +26,29 @@ class App extends Component {
  *       adjust it here.
  */
 App.propTypes = {
-  actions: PropTypes.shape({})
+  actions: PropTypes.shape({
+    appSetDescriptionId: PropTypes.func.isRequired,
+  }),
+  app: PropTypes.shape({})
 };
-function mapStateToProps(state) { // eslint-disable-line no-unused-vars
+function mapStateToProps(state) {
+  // eslint-disable-line no-unused-vars
   /* Populated by react-webpack-redux:reducer */
-  const props = {};
-  return props;
+  return {
+    descriptionId: state.app.descriptionId,
+  };
 }
 function mapDispatchToProps(dispatch) {
   /* Populated by react-webpack-redux:action */
-  const actions = {};
-  const actionMap = { actions: bindActionCreators(actions, dispatch) };
-  return actionMap;
+  const actions = {
+    appSetDescriptionId,
+  };
+
+  return {
+    componentWillMount: () => {
+      const descriptionId = Math.floor(Math.random() * 2.0);
+      dispatch(appSetDescriptionId(descriptionId));
+    },
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

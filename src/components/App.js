@@ -14,8 +14,48 @@ const batteryLowImage = require('../images/battery_low.png');
 // "Shibuya night" Photo by Redd Angelo on Unsplash
 
 class AppComponent extends React.Component {
+  componentWillMount() {
+    this.props.componentWillMount();
+  }
 
   render() {
+    const descriptions = {
+      0: [
+        (
+          <div key="title" className="card-title">
+            「あっ、スマホのバッテリーが...！」
+          </div>
+        ),
+        (
+          <div key="description" className="card-description">
+            外出先で突然訪れる、<br />
+            <div className="card-list">
+              「あれ、スマホのバッテリーがない！」<br />
+              「充電するのを忘れてた！」
+            </div>
+            こんなピンチを<b>「２分」</b>で解決するサービスが、あなたの街ではじまります。
+          </div>
+        ),
+      ],
+      1: [
+        (
+          <div key="title" className="card-title">
+            「スマホのバッテリーがもつか心配、、、。」
+          </div>
+        ),
+        (
+          <div key="description" className="card-description">
+            スマホのバッテリーが心配で、外出のときも携帯バッテリーを持ち歩いていませんか？<br />
+            <div className="card-list">
+              「荷物が重くなるけどしかたない。。。」<br />
+              「携帯バッテリーの充電が面倒臭い！」
+            </div>
+            こんな悩みを<b>「２分」</b>で解決するサービスが、あなたの街ではじまります。
+          </div>
+        ),
+      ],
+    };
+
     return (
       <div className="page-container">
         <ScrollableAnchor id="content-title" className="anchor">
@@ -64,17 +104,7 @@ class AppComponent extends React.Component {
               className="battery-low-image"
             />
             <div className="card">
-              <div className="card-title">
-                「あっ、スマホのバッテリーが...！」
-              </div>
-              <div className="card-description">
-                外出先で突然訪れる、<br />
-                <div className="card-list">
-                  「あれ、スマホのバッテリーがない！」<br />
-                  「充電するのを忘れてた！」
-                </div>
-                こんなピンチを<b>「２分」</b>で解決するサービスが、あなたの街ではじまります。
-              </div>
+              {descriptions[this.props.descriptionId]}
               <div className="spacer" />
               <Button
                 raised
@@ -112,6 +142,7 @@ class AppComponent extends React.Component {
 }
 
 AppComponent.defaultProps = {
+  descriptionId: 0,
 };
 
 export default AppComponent;
