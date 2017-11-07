@@ -4,6 +4,9 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import App from './containers/App';
 import configureStore from './stores';
+import GA from 'react-ga';
+
+GA.initialize('UA-22985291-3');
 
 const store = configureStore();
 

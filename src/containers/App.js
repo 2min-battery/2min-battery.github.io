@@ -10,10 +10,30 @@ import React, {
 } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 import {
   appSetDescriptionId,
 } from '../actions/';
 import Main from '../components/App';
+
+const generateUuid = () => {
+  // https://github.com/GoogleChrome/chrome-platform-analytics/blob/master/src/internal/identifier.js
+  // const FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
+  for (let i = 0, len = chars.length; i < len; i++) {
+      switch (chars[i]) {
+          case "x":
+              chars[i] = Math.floor(Math.random() * 16).toString(16);
+              break;
+          case "y":
+              chars[i] = (Math.floor(Math.random() * 4) + 8).toString(16);
+              break;
+      }
+  }
+  return chars.join("");
+}
+
+
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
@@ -48,6 +68,38 @@ function mapDispatchToProps(dispatch) {
     componentWillMount: () => {
       const descriptionId = Math.floor(Math.random() * 2.0);
       dispatch(appSetDescriptionId(descriptionId));
+
+      const cookie = document.cookie;
+      const keyValues = cookie.split(';').map(str => str.split('='));
+      const userIdObj = keyValues.find(kvp => kvp[0] == 'userId');
+      const userId = userIdObj || generateUuid();
+      document.cookie = `userId=${userId}`;
+
+      console.log(`[componentWillMount] userId: ${userId}`);
+
+      ReactGA.set({
+        userId
+      });
+    },
+    onViewInScreen: (viewName) => {
+      console.log(`[onViewInScreen] ${viewName}`);
+      ReactGA.pageview(viewName);
+    },
+    onNextClicked: (buttonName) => {
+      console.log(`[onNextClicked] ${buttonName}`);
+      ReactGA.event({
+        category: 'User',
+        action: 'Clicked Next Button',
+        value: buttonName,
+      });
+    },
+    onSnsClicked: (snsName) => {
+      console.log(`[onSnsClicked] ${snsName}`);
+      ReactGA.event({
+        category: 'Social',
+        action: 'Clicked Link to SNS',
+        value: snsName,
+      });
     },
   };
 }

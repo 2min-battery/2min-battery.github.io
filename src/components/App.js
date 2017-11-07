@@ -4,6 +4,7 @@ import Card from "material-ui/Card";
 import Grid from "material-ui/Grid";
 import ScrollableAnchor from 'react-scrollable-anchor'
 import { ThumbUp } from 'material-ui-icons';
+import Observer from 'react-intersection-observer';
 
 import './app.scss';
 
@@ -12,6 +13,12 @@ const batteryLowImage = require('../images/battery_low.png');
 
 // "Shibuya" Photo by Jason Ortego on Unsplash
 // "Shibuya night" Photo by Redd Angelo on Unsplash
+
+const onViewInScreen = (viewName, inView, props) => {
+  if (inView) {
+    props.onViewInScreen(viewName);
+  }
+};
 
 class AppComponent extends React.Component {
   componentWillMount() {
@@ -73,15 +80,17 @@ class AppComponent extends React.Component {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={9}>
-                  <div className="card-content">
-                    <div className="card-title">
-                      2分でバッテリー
+                  <Observer onChange={(inView) => onViewInScreen('Title', inView, this.props)}>
+                    <div className="card-content">
+                      <div className="card-title">
+                        2分でバッテリー
+                      </div>
+                      <div className="card-subtitle">
+                        スマホのバッテリーがない！<br />
+                        救済サービス
+                      </div>
                     </div>
-                    <div className="card-subtitle">
-                      スマホのバッテリーがない！<br />
-                      救済サービス
-                    </div>
-                  </div>
+                  </Observer>
                 </Grid>
               </Grid>
               <div className="spacer" />
@@ -89,6 +98,7 @@ class AppComponent extends React.Component {
                 raised
                 color="primary"
                 href="#content-description"
+                onClick={() => this.props.onNextClicked('Title')}
               >
                 くわしく
               </Button>
@@ -104,12 +114,15 @@ class AppComponent extends React.Component {
               className="battery-low-image"
             />
             <div className="card">
-              {descriptions[this.props.descriptionId]}
+              <Observer onChange={(inView) => onViewInScreen(`Description-${this.props.descriptionId}`, inView, this.props)}>
+                {descriptions[this.props.descriptionId]}
+              </Observer>
               <div className="spacer" />
               <Button
                 raised
                 color="primary"
                 href="#content-registration"
+                onClick={() => this.props.onNextClicked('Description')}
               >
                 次へ
               </Button>
@@ -120,16 +133,22 @@ class AppComponent extends React.Component {
           <div className="registration-content">
             <ThumbUp className="thumb-up-image"/>
             <div className="card">
-              <div className="card-description">
-                このサービスに興味はありませんか？<br />
-                わたしたちのFacebookページで、このサービスの最新情報をお届けします。
-                <div className="spacer" />
-              </div>
+              <Observer onChange={(inView) => onViewInScreen(`GuideToFacebook`, inView, this.props)}>
+                <div className="card-description">
+                  こんな、みなさんの悩みを解決するサービスを、<br />
+                  ただいま絶賛開発中です！<br />
+                  <br />
+                  わたしたちのFacebookページで、このサービスの最新情報をお届けします。<br />
+                  今しばらくお待ちください！
+                  <div className="spacer" />
+                </div>
+              </Observer>
               <div className="spacer" />
               <Button
                 raised
                 color="primary"
                 href="https://www.facebook.com/2min.battery/"
+                onClick={() => this.props.onSnsClicked('Facebook')}
               >
                 facebookページでいいね！する
               </Button>
