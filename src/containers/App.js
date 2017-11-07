@@ -90,7 +90,7 @@ function mapDispatchToProps(dispatch) {
       ReactGA.event({
         category: 'User',
         action: 'Clicked Next Button',
-        value: buttonName,
+        label: buttonName,
       });
     },
     onSnsClicked: (snsName) => {
@@ -98,7 +98,7 @@ function mapDispatchToProps(dispatch) {
       ReactGA.event({
         category: 'Social',
         action: 'Clicked Link to SNS',
-        value: snsName,
+        label: snsName,
       });
     },
   };
